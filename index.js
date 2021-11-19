@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
   res.send("Heloo to server for STCVIT");
 })
 app.post('/show', (req, res) => {
+  const repoName=req.body.name;
   const accessToken = process.env.GIT_HUB_OAUTH_TOKEN;
   const query = `
   query {
@@ -41,7 +42,7 @@ app.post('/show', (req, res) => {
       id
       login
     }
-    repository(name: "STCVIT", owner: "STCVIT", followRenames: false) {
+    repository(name: "${repoName}", owner: "STCVIT", followRenames: false) {
       description
       createdAt
       databaseId
@@ -151,6 +152,9 @@ app.post('/show', (req, res) => {
       'Authorization': `Bearer ${accessToken}`,
     },
   }).then(res => res.text())
-    .then(body => res.send(body))
+    .then(body => {
+      console.log(body);
+      res.send(body)
+    })
     .catch(error => console.error(error));
 })
