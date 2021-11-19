@@ -37,48 +37,24 @@ app.post('/show', (req, res) => {
   const accessToken = process.env.GIT_HUB_OAUTH_TOKEN;
   const query = `
   query {
-    repositoryOwner(login: "STCVIT") {
-      avatarUrl(size: 10)
-      id
-      login
-    }
     repository(name: "${repoName}", owner: "STCVIT", followRenames: false) {
       description
       createdAt
-      databaseId
-      deleteBranchOnMerge
       forkCount
-      forkingAllowed
       isFork
       isInOrganization
       isPrivate
-      isMirror
-      isLocked
       id
-      homepageUrl
-      hasWikiEnabled
       hasProjectsEnabled
       hasIssuesEnabled
       name
-      projectsUrl
-      projectsResourcePath
       pushedAt
       collaborators {
         nodes {
-          avatarUrl(size: 10)
           createdAt
-          databaseId
           email
           name
-          updatedAt
-          login
           location
-          isSiteAdmin
-          isEmployee
-          company
-          bio
-          viewerCanCreateProjects
-          viewerCanChangePinnedItems
           url
         }
         edges {
@@ -86,31 +62,9 @@ app.post('/show', (req, res) => {
         }
         totalCount
       }
-      autoMergeAllowed
-      codeOfConduct {
-        body
-        id
-        key
-        name
-        resourcePath
-        url
-      }
-      viewerPermission
-      viewerHasStarred
-      viewerCanAdminister
       url
       updatedAt
       nameWithOwner
-      owner {
-        avatarUrl(size: 10)
-        id
-        login
-      }
-      descriptionHTML
-      isEmpty
-      isBlankIssuesEnabled
-      isDisabled
-      isArchived
       languages(first: 10) {
         nodes {
           color
@@ -120,27 +74,18 @@ app.post('/show', (req, res) => {
         totalCount
         totalSize
       }
-      mergeCommitAllowed
       releases(first: 10) {
         totalCount
       }
       commitComments(first: 10) {
         totalCount
-        nodes {
-          id
-          author {
-            login
-            avatarUrl(size: 10)
-          }
-          authorAssociation
-          bodyHTML
-          body
-          bodyText
-          createdAt
-          lastEditedAt
-          publishedAt
-        }
       }
+      primaryLanguage {
+        color
+        id
+        name
+      }
+      stargazerCount
     }
   }
   `;
